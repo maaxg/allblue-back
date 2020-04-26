@@ -2,14 +2,17 @@ package com.example.back.ecommerce.config;
 
 import com.example.back.ecommerce.entities.Category;
 import com.example.back.ecommerce.entities.Product;
+import com.example.back.ecommerce.entities.User;
 import com.example.back.ecommerce.repositories.CategoryRepository;
 import com.example.back.ecommerce.repositories.ProductRepository;
-import lombok.Builder;
+import com.example.back.ecommerce.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
 
 import java.util.Collections;
 import java.util.stream.Stream;
@@ -23,8 +26,11 @@ public class Initialization implements CommandLineRunner {
     private ProductRepository productRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public void run(String... args) throws Exception {
+
 
         /*Category c1 = new Category(null, "Shoes");
         categoryRepository.save(c1);
@@ -32,8 +38,16 @@ public class Initialization implements CommandLineRunner {
         productRepository.save(p1);
         p1.getCategories().add(c1);
         productRepository.save(p1);*/
-        Product p1 = new Product(null, "Nike SB", 199.99, null, "Comfortable shoe by NIKE");
-        Product p2 = new Product(null, "Air Jordan", 500.99, null, "Comfortable shoe by Nike");
+        User u1 = new User(null, "admin", "adm", "123.123.123.12", "admin@gmail.com", "1234", null, null, null, null);
+        userRepository.save(u1);
+
+        String path_nikesb = "C:\\Users\\PC\\IdeaProjects\\ecommerce\\img\\nike2.jpg";
+        String path_jordan = "C:\\Users\\PC\\IdeaProjects\\ecommerce\\img\\nikejordan.jpg";
+
+
+
+        Product p1 = new Product(null, "Nike SB", 199.99, path_nikesb, "Comfortable shoe by NIKE");
+        Product p2 = new Product(null, "Air Jordan", 500.99, path_jordan , "Comfortable shoe by Nike");
         Stream.of(p1, p2).forEach(product ->
                 productRepository.save(new Product(product)));
 

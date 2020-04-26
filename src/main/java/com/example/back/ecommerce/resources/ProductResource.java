@@ -1,15 +1,11 @@
 package com.example.back.ecommerce.resources;
 
 import com.example.back.ecommerce.entities.Product;
-import com.example.back.ecommerce.entities.util.Image;
 import com.example.back.ecommerce.services.ProductService;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.ws.rs.POST;
 import java.util.List;
 
 @RestController

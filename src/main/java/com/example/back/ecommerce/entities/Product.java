@@ -42,7 +42,7 @@ public class Product implements Serializable {
         this.id = p.getId();
         this.name = p.getName();
         this.price = p.getPrice();
-        this.image = p.getImage();
+        this.image = getImage();
         this.description = p.getDescription();
 
     }
@@ -103,6 +103,5 @@ public class Product implements Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
-
 
 }
