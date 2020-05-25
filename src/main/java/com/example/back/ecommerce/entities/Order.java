@@ -1,5 +1,6 @@
 package com.example.back.ecommerce.entities;
 
+import com.example.back.ecommerce.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
@@ -8,9 +9,10 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+@Entity
+@Table(name = "tb_order")
 public class Order implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,12 +34,11 @@ public class Order implements Serializable {
 
     public Order(){}
 
-    public Order(Instant instant, Integer orderStatus, User client, Set<OrderItem> items, Payment payment) {
+    public Order(Long id, Instant instant, OrderStatus orderStatus, User client) {
+        this.id = id;
         this.instant = instant;
-        this.orderStatus = orderStatus;
+        setOrderStatus(orderStatus);
         this.client = client;
-        this.items = items;
-        this.payment = payment;
     }
 
     public Long getId() {
@@ -60,8 +61,10 @@ public class Order implements Serializable {
         return orderStatus;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if(orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     public User getClient() {
@@ -88,6 +91,7 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
+
     public Double getTotal(){
         double sum = 0.0;
         for(OrderItem x : items){
@@ -106,6 +110,13 @@ public class Order implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((client == null) ? 0 : client.hashCode());
+        return result;
+        //return Objects.hash(getId());
+
     }
+
+
 }
