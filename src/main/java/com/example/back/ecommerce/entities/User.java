@@ -24,11 +24,13 @@ public class User implements Serializable, UserDetails {
     private String street;
     private Integer house_number;
     private String neighbour;
+    @OneToOne
+    private CreditCard creditCard;
 
     public User(){}
 
     public User(String id, String name, String lastName, String cpf, String email, String password, String cep, String street,
-                Integer house_number, String neighbour){
+                Integer house_number, String neighbour, CreditCard creditCard){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -39,6 +41,7 @@ public class User implements Serializable, UserDetails {
         this.street = street;
         this.house_number = house_number;
         this.neighbour = neighbour;
+        this.creditCard = creditCard;
     }
 
     public String getId() {
@@ -79,6 +82,14 @@ public class User implements Serializable, UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     @Override

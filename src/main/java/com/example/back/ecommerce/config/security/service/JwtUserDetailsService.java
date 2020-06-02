@@ -1,6 +1,7 @@
 package com.example.back.ecommerce.config.security.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.back.ecommerce.entities.User;
 import com.example.back.ecommerce.repositories.UserRepository;
@@ -19,7 +20,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+        List<User> list = userRepository.findByEmail(email);
+        User user = list.get(0);
         if(user == null){
             throw new UsernameNotFoundException("User not found!");
         }

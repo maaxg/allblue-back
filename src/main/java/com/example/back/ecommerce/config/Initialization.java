@@ -31,6 +31,8 @@ public class Initialization implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CreditCardRepository creditCardRepository;
     @Override
     public void run(String... args) throws Exception {
 
@@ -38,9 +40,10 @@ public class Initialization implements CommandLineRunner {
         Category c1 = new Category(null, "Shoes");
         categoryRepository.save(c1);
 
-
-        User u1 = new User(null, "admin", "adm", "123.123.123-12", "admin@gmail.com", (new BCryptPasswordEncoder().encode("1234")), "154897-654", "Rua Carochinha", 154, "Jhonson Neigh");
-        User u2 = new User(null, "Maxsuel", "Gomes", "707.142.536-35", "max@gmail.com", (new BCryptPasswordEncoder().encode("12345")), "154897-654", null, null, null);
+        CreditCard creditCard = new CreditCard(null, "Maxsuel Gomes P Silva", "1234 1234 1234 1234", "17/25", "441");
+        creditCardRepository.save(creditCard);
+        User u1 = new User(null, "admin", "adm", "123.123.123-12", "admin@gmail.com", (new BCryptPasswordEncoder().encode("1234")), "154897-654", "Rua Carochinha", 154, "Jhonson Neigh", null);
+        User u2 = new User(null, "Maxsuel", "Gomes", "707.142.536-35", "max@gmail.com", (new BCryptPasswordEncoder().encode("12345")), "154897-654", null, null, null, creditCard);
         userRepository.saveAll(Arrays.asList(u1, u2));
 
 

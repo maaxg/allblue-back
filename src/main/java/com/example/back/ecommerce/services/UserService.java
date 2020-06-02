@@ -18,9 +18,12 @@ public class UserService {
 
     public List<User> findAll(){return repository.findAll();}
 
-    public User findById(String id){
+   /* public User findById(String id){
         Optional<User> obj = repository.findById(id);
         return obj.get();
+    }*/
+    public List<User> findByEmail(String email){
+        return repository.findByEmail(email);
     }
     public User insert(User obj){return repository.save(obj);}
     public void delete(String id){

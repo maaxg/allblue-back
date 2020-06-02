@@ -62,12 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()
-              /*  .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+             /*  .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()*/
                 .disable()
 // Não cheque essas requisições
                 .authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate", "/api/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/","/users", "/products", "/h2-console").permitAll().
+                .antMatchers(HttpMethod.GET, "/","/users", "/products", "/h2-console", "/users/{email}").permitAll().
 // Qualquer outra requisição deve ser checada
         anyRequest().authenticated().and().
                 cors().and().
